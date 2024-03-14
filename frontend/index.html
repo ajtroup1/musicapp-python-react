@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link src="./src/index.css" rel="stylesheet" />
+    <title>Song List</title>
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-light bg-light">
+      <a class="navbar-brand" href="">
+        <img
+          src="data:image/png;base64,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"
+          width="auto"
+          height="50"
+          class="d-inline-block align-top"
+          alt=""
+        />
+        Ranker
+      </a>
+    </nav>
+
+    <!-- TITLE / HEADER -->
+    <div class="header-container">
+      <h2>Song Ranker</h2>
+    </div>
+    <div id="root"></div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

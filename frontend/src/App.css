@@ -1,0 +1,18 @@
+#album-cover {
+  height: 100px;
+  width: auto;
+}
+
+#asoa-img {
+  height: 100px;
+  width: auto;
+}
+
+.toggle-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.toggle-form button {
+  width: 200px;
+}
