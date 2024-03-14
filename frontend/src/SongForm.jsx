@@ -8,7 +8,7 @@ const SongForm = ({ existingSong = {}, updateCallback }) => {
   const [rating, setRating] = useState(existingSong.rating || "");
   const [imgURL, setImgURL] = useState(existingSong.imgURL || "");
   const [runtime, setRuntime] = useState(existingSong.runtime || "");
-  const [asoa, setAsoa] = useState(existingSong.asoa || "");
+  const [asoa, setAsoa] = useState(existingSong.asoa || false);
 
   const updating = Object.entries(existingSong).length !== 0;
 

@@ -22,4 +22,7 @@ class Song(db.Model):
             "runtime": self.runtime,
             "asoa": self.asoa
         }
+    
+    def __repr__(self):
+        return f"Song(songName={self.songName}, artist={self.artist}, album={self.album}, rating={self.rating}, imgURL={self.imgURL}, runtime={self.runtime}, asoa={self.asoa})"
 

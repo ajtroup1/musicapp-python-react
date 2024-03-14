@@ -1,10 +1,8 @@
 #endpoints: create, read, update (using soft delete)
 from flask import request, jsonify, Flask
 from config import app, db
-from flask_cors import CORS
 from models import Song
 
-CORS(app)  # Enable CORS for all routes
 
 
 @app.route('/songs', methods=['GET'])
@@ -32,8 +30,22 @@ def create_song():
     runtime = request.json.get('runtime')
     asoa = request.json.get('asoa')
 
-    if not songName or not artist or not album or not rating or not imgURL or not runtime or not asoa: #if one of the relevant fields is missing during object creation
-        return jsonify({'message': 'You must include all fields when creating a song object'}), 400 #400 = bad request error
+    testSong = Song(songName=songName, artist=artist, album=album, rating=rating, imgURL=imgURL, runtime=runtime, asoa=asoa)
+    print(testSong)
+
+
+    if not songName: #if one of the relevant fields is missing during object creation
+        return jsonify({'message': 'You must include a song name'}), 400 #400 = bad request error
+    elif not artist:
+        return jsonify({"message": "You must include an artist name"}), 400
+    elif not album:
+        return jsonify({"message": "You must include an album name"}), 400
+    elif not imgURL:
+        return jsonify({"message": "You must include an image url"}), 400
+    elif not runtime:
+        return jsonify({"message": "You must include runtime"}), 400
+    elif asoa is None:
+        return jsonify({"message": "Error with asoa"}), 400
     
     newSong = Song(songName=songName, artist=artist, album=album, rating=rating, imgURL=imgURL, runtime=runtime, asoa=asoa)
 
@@ -65,7 +77,7 @@ def update_song(id):
 
     return jsonify({'message': 'Song updated'}), 200 #general success response
 
-@app.route('/deletesong<int:id>', methods=['DELETE']) #more likely to update a deleted bool (soft delete) in real projects, but here is how to hard delete
+@app.route('/deletesong/<int:id>', methods=['DELETE']) #more likely to update a deleted bool (soft delete) in real projects, but here is how to hard delete
 def delete_song(id):
     song = Song.query.get(id)
 
