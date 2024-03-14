@@ -3,3 +3,13 @@ button,
 label {
   margin: 10px;
 }
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-text {
+  margin-left: 15px;
+  margin-top: 8px;
+}

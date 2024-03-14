@@ -29,3 +29,67 @@
   font-size: 25px;
   font-weight: bold;
 }
+
+#album-cover {
+  height: 120px;
+  width: auto;
+  border-radius: 5px;
+  border: 0px solid transparent; /* Add a transparent border */
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1); /* Add a shadow effect */
+  transition: box-shadow 0.3s ease; /* Add transition effect for smooth hover */
+}
+
+#album-cover:hover {
+  transform: scale(2); /* Enlarge the image on hover */
+  box-shadow: 0 20px 20px rgba(0, 0, 0, 0.4); /* Increase shadow on hover */
+}
+
+
+#asoa-img {
+  height: 120px;
+  width: auto;
+  border: 4px solid transparent
+}
+#asoa-img[alt="Good"] {
+  border-color: gold;/
+}
+
+#asoa-img[alt="Bad"] {
+  border-color: red;
+}
+
+#table {
+  border-collapse: separate;
+  border-spacing: 0 10px; /* Adjust the second value to set the distance between rows */
+}
+
+td,
+th {
+  vertical-align: middle;
+}
+
+#add-song-button {
+  display: block;
+  margin: 0 auto; /* Center the button horizontally */
+  margin-top: 15px;
+  margin-bottom: 10px;
+  width: 200px;
+}
+
+
+.header-container {
+  display: flex;
+  justify-content: center; /* Center the flex items horizontally */
+  align-items: center;
+  margin-top: 20px;
+}
+
+#up-arrow,
+#down-arrow {
+  height: 30px; /* Adjust the height as needed */
+  width: auto; /* Let the browser calculate the width based on the height */
+}
+
+.main-heading {
+  margin: 0 10px; /* Adjust the margin as needed */
+}

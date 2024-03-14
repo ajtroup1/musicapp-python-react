@@ -35,13 +35,14 @@ function App() {
   const fetchSongs = async () => {
     const response = await fetch("http://127.0.0.1:5000/songs");
     const data = await response.json();
-    setSongs(data.songs);
-    console.log(data.songs);
+    const rankedSongs = data.songs.sort((a, b) => b.rating - a.rating);
+    setSongs(rankedSongs);
+    console.log(rankedSongs);
   };
 
   return (
     <div>
-      <button onClick={openCreateModal}>Add a new song</button>
+      <button onClick={openCreateModal} id="add-song-button" className="btn btn-primary">Add a new song</button>
       <SongList
         songs={songs}
         updateSong={openEditModal}

@@ -23,7 +23,7 @@ const SongList = ({ songs, updateSong, updateCallback }) => {
 
   return (
     <div className="container">
-      <table className="table table-striped">
+      <table className="table table-striped" id="song-table">
         <thead className="thead-dark">
           <tr>
             <th>Name</th>
@@ -42,7 +42,7 @@ const SongList = ({ songs, updateSong, updateCallback }) => {
               <td>{song.songName}</td>
               <td>{song.artist}</td>
               <td>{song.album}</td>
-              <td>{song.rating}</td>
+              <td>{song.rating}/10</td>
               <td>
                 <img
                   src={song.imgURL}

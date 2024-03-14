@@ -74,7 +74,7 @@ const SongForm = ({ existingSong = {}, updateCallback }) => {
         </div>
 
         <div className="form-group">
-          <label htmlFor="rating">Rating:</label>
+          <label htmlFor="rating">Rating (?/10):</label>
           <input
             type="text"
             className="form-control"
