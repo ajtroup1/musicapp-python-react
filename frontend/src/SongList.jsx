@@ -1,7 +1,26 @@
 import React from "react";
 import "./App.css";
 
-const SongList = ({ songs }) => {
+const SongList = ({ songs, updateSong, updateCallback }) => {
+  const onDelete = async (id) => {
+    const options = {
+      method: "DELETE",
+    };
+    try {
+      const response = await fetch(
+        `http://127.0.0.1:5000/deletesong/${id}`,
+        options
+      );
+      if (response.ok) {
+        updateCallback();
+      } else {
+        console.error("Failed to delete");
+      }
+    } catch (error) {
+      alert(error);
+    }
+  };
+
   return (
     <div className="container">
       <table className="table table-striped">
@@ -49,8 +68,18 @@ const SongList = ({ songs }) => {
                 )}
               </td>
               <td>
-                <button className="btn btn-primary">Edit</button>
-                <button className="btn btn-danger">Delete</button>
+                <button
+                  className="btn btn-primary"
+                  onClick={() => updateSong(song)}
+                >
+                  Edit
+                </button>
+                <button
+                  className="btn btn-danger"
+                  onClick={() => onDelete(song.id)}
+                >
+                  Delete
+                </button>
               </td>
             </tr>
           ))}

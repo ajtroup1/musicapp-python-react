@@ -5,11 +5,32 @@ import SongForm from "./SongForm";
 
 function App() {
   const [songs, setSongs] = useState([]);
-  const [showAddSongForm, setShowAddSongForm] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentSong, setCurrentSong] = useState({});
 
   useEffect(() => {
     fetchSongs();
   }, []);
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setCurrentSong({});
+  };
+
+  const openCreateModal = () => {
+    if (!isModalOpen) setIsModalOpen(true);
+  };
+
+  const openEditModal = (song) => {
+    if (isModalOpen) return;
+    setCurrentSong(song);
+    setIsModalOpen(true);
+  };
+
+  const onUpdate = () => {
+    closeModal();
+    fetchSongs();
+  };
 
   const fetchSongs = async () => {
     const response = await fetch("http://127.0.0.1:5000/songs");
@@ -18,19 +39,27 @@ function App() {
     console.log(data.songs);
   };
 
-  const toggleAddSongForm = () => {
-    setShowAddSongForm(!showAddSongForm);
-  };
-
   return (
-    <div className="App">
-      <div class="toggle-form">
-        <button onClick={toggleAddSongForm} className="btn btn-primary">
-          {showAddSongForm ? "Hide Add Song Form" : "Add Song"}
-        </button>
-      </div>
-      {showAddSongForm && <SongForm />}
-      <SongList songs={songs} />
+    <div>
+      <button onClick={openCreateModal}>Add a new song</button>
+      <SongList
+        songs={songs}
+        updateSong={openEditModal}
+        updateCallback={onUpdate}
+      />
+      {isModalOpen && (
+        <div id="modal">
+          <div id="modal-content">
+            <span className="create-title">Add new song</span>
+            <span className="close" onClick={closeModal}>
+              &times;
+            </span>
+            <br />
+            <br />
+            <SongForm existingSong={currentSong} updateCallback={onUpdate} />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -1,13 +1,26 @@
 #endpoints: create, read, update (using soft delete)
-from flask import request, jsonify
+from flask import request, jsonify, Flask
 from config import app, db
+from flask_cors import CORS
 from models import Song
+
+CORS(app)  # Enable CORS for all routes
+
 
 @app.route('/songs', methods=['GET'])
 def get_songs():
     songs = Song.query.all()
     json_songs = [song.to_json() for song in songs]  # Convert map object to list
     return jsonify({'songs': json_songs})
+
+@app.route('/songs/<int:id>', methods=['GET'])
+def get_song_by_id(id):
+    song = Song.query.filter_by(id=id).first()
+    if song:
+        json_song = song.to_json()
+        return jsonify({'song': json_song})
+    else:
+        return jsonify({'message': 'Song not found'}), 404
 
 @app.route('/addsong', methods=['POST'])
 def create_song():

@@ -1,23 +1,27 @@
 import { useState } from "react";
 import "./SongForm.css"; // Import custom CSS file for additional styling
 
-const SongForm = () => {
-  const [songName, setSongName] = useState("");
-  const [artist, setArtist] = useState("");
-  const [album, setAlbum] = useState("");
-  const [rating, setRating] = useState("");
-  const [imgURL, setImgURL] = useState("");
-  const [runtime, setRuntime] = useState("");
-  const [asoa, setAsoa] = useState("");
+const SongForm = ({ existingSong = {}, updateCallback }) => {
+  const [songName, setSongName] = useState(existingSong.songName || "");
+  const [artist, setArtist] = useState(existingSong.artist || "");
+  const [album, setAlbum] = useState(existingSong.album || "");
+  const [rating, setRating] = useState(existingSong.rating || "");
+  const [imgURL, setImgURL] = useState(existingSong.imgURL || "");
+  const [runtime, setRuntime] = useState(existingSong.runtime || "");
+  const [asoa, setAsoa] = useState(existingSong.asoa || "");
+
+  const updating = Object.entries(existingSong).length !== 0;
 
   const onSubmit = async (e) => {
     e.preventDefault();
 
     const data = { songName, artist, album, rating, imgURL, runtime, asoa };
     console.log(data);
-    const url = "http://127.0.0.1:5000/addsong";
+    const url =
+      "http://127.0.0.1:5000/" +
+      (updating ? `editsong/${existingSong.id}` : `addsong`);
     const options = {
-      method: "POST",
+      method: updating ? "PATCH" : "POST",
       headers: {
         "Content-Type": "application/json",
       },
@@ -29,7 +33,7 @@ const SongForm = () => {
       const data = await response.json();
       alert(data.message);
     } else {
-      //successful
+      updateCallback();
     }
   };
 
@@ -116,7 +120,7 @@ const SongForm = () => {
         </div>
 
         <button type="submit" className="btn btn-primary">
-          Submit
+          {updating ? "Update" : "Add Song"}
         </button>
       </form>
     </div>
